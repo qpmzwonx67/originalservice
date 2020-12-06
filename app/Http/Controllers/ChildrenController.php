@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Child;
+use App\Post;
+use App\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,24 +19,15 @@ class ChildrenController extends Controller
         if(\Auth::check()){
             $user_id = Auth::user()->id;
             $children = Auth::user()->children()->get();
+            // $posts = Post::all();
+            $posts = Post::where('open', 1)->orderBy('created_at', 'desc')->paginate(10);
             //welcomeにユーザーIDを渡す
             return view('welcome',[
                 'user_id'=>$user_id,
                 'children' => $children,
+                'posts'=>$posts,
             ]);
-        
-        //ログインユーザーのユーザーIDを取得する
-    //if(\Auth::check()){
-        
-      //  $user_id = Auth::user()->id;
-        
-        //welcomeにユーザーIDを渡す
-
-        //return view('welcome',[
-          //  'user_id'=>$user_id,
-            //]);
-            
-        }
+            }
     
     else{
         return view('welcome');

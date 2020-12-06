@@ -23,8 +23,13 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
+Route::get('posts/limit','PostsController@limit')->name('posts.limit');
+
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('children', 'ChildrenController');
-    Route::resource('posts', 'PostsController', ['only' => ['store', 'destroy']]);
+    Route::resource('posts', 'PostsController');
 });
+
+
+
 

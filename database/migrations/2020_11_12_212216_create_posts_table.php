@@ -20,8 +20,8 @@ class CreatePostsTable extends Migration
             $table->tinyInteger('age');
             $table->string('photo');
             $table->tinyInteger('open');
-            $table->string('allowemail1');
-            $table->string('allowemail2');
+            $table->string('allowemail1')->nullable();
+            $table->string('allowemail2')->nullable();
             $table->timestamps();
             
             // 外部キー制約

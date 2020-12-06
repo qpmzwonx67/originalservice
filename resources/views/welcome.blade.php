@@ -5,7 +5,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-8">
-                    <p>写真の掲載部分</p>                   
+                    <p>写真の掲載部分</p>
+
+               <div> 
+                @foreach ($posts as $post)
+                <!--<img src={{$post->photo}} width=300 height=auto>               -->
+                <!--{!! link_to_route('posts.show', '詳細', ['post' => $post->id]) !!}-->
+                    <!--{{Form::image($post->photo)}}-->
+                    
+
+                    
+                <a href="{{url('/posts/'.$post->id)}}">
+                    <img src="{{$post->photo}}" width=300 height=auto>
+                </a>
+                
+                @endforeach
+                </table>
+                </div>
+
                 </div>
                 <div class="col-sm-4 border-left">
                     <div class="input-group">
@@ -16,10 +33,10 @@
                     </div>
 
                     <ul class="list-unstyled">
-                        <li><a href="#">写真を投稿する</a></li>
-                        <li><a href="#">投稿した写真をみる</a></li>
+                        <li> {!! link_to_route('posts.create', '写真を投稿する', [], []) !!}</li>
+                        <li> {!! link_to_route('posts.index', '投稿した写真をみる', []) !!}</li>
                         <li><a href="#">お気に入り一覧</a></li>
-                        <li><a href="#">限定公開一覧</a></li>
+                        <li> {!! link_to_route('posts.limit', '限定公開一覧', []) !!}</li>
                         <li> {!! link_to_route('children.create', '子どもの情報登録', [], []) !!}</li>
                     @foreach ($children as $child)
                         <li> {!! link_to_route('children.edit', '子どもの登録情報の修正('.$child->nickname.')', ['child'=>$child->id]) !!}</li>
